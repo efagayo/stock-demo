@@ -1,21 +1,19 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useState } from "react";
-import { Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { Box, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar";
 import { tokens } from "../../theme";
+import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
+import PeopleIcon from '@mui/icons-material/People';
+import WalletIcon from '@mui/icons-material/Wallet';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import ShowChartRoundedIcon from '@mui/icons-material/ShowChartRounded';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import StockImage1 from "../../assets/img1.jpg"; // Import stock images
+import StockImage2 from "../../assets/img2.jpg";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -29,8 +27,9 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       onClick={() => setSelected(title)}
       icon={icon}
     >
-      <Typography>{title}</Typography>
-      <Link to={to} />
+      <Link to={to}>
+        <Typography>{title}</Typography>
+      </Link>
     </MenuItem>
   );
 };
@@ -61,105 +60,115 @@ const Sidebar = () => {
         },
       }}
     >
+      <Menu iconShape="square">
+        {/* Stock images */}
+        <MenuItem>
+          <img
+            src={StockImage1}
+            alt="Stock Image 1"
+            style={{ maxWidth: "120px", maxHeight: "120px" }} // Set max width and height
+          />
+        </MenuItem>
+        <MenuItem>
+          <img
+            src={StockImage2}
+            alt="Stock Image 2"
+            style={{ maxWidth: "120px", maxHeight: "120px" }} // Set max width and height
+          />
+        </MenuItem>
 
-        <Menu iconShape="square">
-          
-
-          {!isCollapsed && (
-            <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
-              
-            </Box>
-          )}
-
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-           
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Main Menu
-            </Typography>
-            <Item
-              title="Home"
-              to="/"
-              icon={<HomeOutlinedIcon />}
+        <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Typography
+            variant="h6"
+            color={colors.grey[300]}
+            sx={{ m: "20px 0 5px 20px" }}
+          >
+            Main Menu
+          </Typography>
+          <Item
+            title="Home"
+            to="/"
+            icon={<HomeOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Item
+            title="Exchange"
+            to="/exchange"
+            icon={<CurrencyExchangeIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <SubMenu title="Stock & Fraud" icon={<ShowChartRoundedIcon />}>
+          <Item
+              title="Stock/ETF"
+              to="/etf"
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Exchange"
-              to="/exchange"
-              icon={<PeopleOutlinedIcon />}
+              title="Index"
+              to="/stock"
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Stock & Fraud"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
+              title="Currency"
+              to="/currency"
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Wallets"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
+              title="Mutual Fund"
+              to="/fund"
               selected={selected}
               setSelected={setSelected}
             />
-             <Item
-              title="Crypto"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+          </SubMenu>
+          <Item
+            title="Wallets"
+            to="/invoices"
+            icon={<WalletIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Item
+            title="Crypto"
+            to="/crypto"
+            icon={<CurrencyBitcoinIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
 
+          <Typography
+            variant="h6"
+            color={colors.grey[300]}
+            sx={{ m: "15px 0 5px 20px" }}
+          >
+            Support
+          </Typography>
+          <Item
+            title="Community"
+            to="/community"
+            icon={<PeopleIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Item
+            title="Help and Support"
+            to="/help"
+            icon={<HelpOutlineOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Support
-            </Typography>
-            <Item
-              title="Community"
-              to="/community"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Help and Support"
-              to="/support"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              
-            </Typography>
-            
-          </Box>
-        </Menu>
-    
+          <Typography
+            variant="h6"
+            color={colors.grey[300]}
+            sx={{ m: "15px 0 5px 20px" }}
+          ></Typography>
+        </Box>
+      </Menu>
     </Box>
   );
 };

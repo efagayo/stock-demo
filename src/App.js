@@ -5,6 +5,10 @@ import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
+import Help from "./scenes/help/help.jsx";
+import Community from "./scenes/community";
+import Exchange from "./scenes/exhange/index.jsx";
+import Stock from "./scenes/stock/index.jsx";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -20,6 +24,12 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/help" element={<Help />} />
+              <Route path="/exchange" element={<Exchange />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/help" element={<Help />} />
+              <Route path="/stock" element={<Stock />} />
+
               
               
             </Routes>
